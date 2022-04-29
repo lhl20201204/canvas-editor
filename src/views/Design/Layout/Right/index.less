@@ -1,0 +1,26 @@
+#design-right-side{
+  display: flex;
+  flex-direction: column;
+  &.tab-open{
+    width: calc(100vw-432px);
+}
+&.tab-close{
+    width: calc(100vw-72px);
+}
+ >div#middle > .close ,
+ >div#bottom > .close {
+    position: absolute;
+    left: 50%; 
+    top: 0;
+    transform: translate(-50%,-100%);
+    width: 96px;
+    height: 15px;
+    background: white;
+    color: black;
+    border-radius: 10px 10px 0 0;
+    display: flex;
+    justify-content: center;
+   
+ }
+ 
+}

@@ -1,0 +1,36 @@
+#middle{
+    &.tab-open{
+           width: calc(100vw - 432px); 
+    }
+    &.tab-close{
+        width: calc(100vw - 72px); 
+    }
+    padding: 4px;
+    height: 104px;
+    position: relative;    
+    > .pageContainer {
+        padding: 8px;
+        white-space: nowrap;
+        overflow-x: scroll;
+        div {
+             &.selected  > canvas{
+                border: 2px solid #93989D;
+             }
+             &.selected  > span {
+                 background:  #F3F3F4;
+             }
+
+            height: 100%;
+            display: inline-block;
+            > canvas {
+                display: block;
+                border: 1px solid rgba(0,0,0,.3);
+            }
+            > span {
+                display:inline-block;
+                width: 100%;
+                text-align: center;
+            }
+        }
+    }
+}

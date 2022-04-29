@@ -1,0 +1,22 @@
+.tab {
+  color: rgba(255, 255, 255, 0.7); 
+  width: 72px;
+  height: 72px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  filter: brightness(0.5);
+  > img{
+      border-radius: 2px;
+  }
+  > span {
+      margin-top: 2px;
+  }
+  &.tabSelected,
+  &:hover{
+    color: rgba(255, 255, 255, 0.9); 
+    filter: brightness(1);
+  }
+}
