@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
 import './index.less'
-import { TabContext } from '../../context'
+import { UtilModalContext } from '../../context'
 const CloseBtn = () =>{ 
-    const { setCur } = useContext(TabContext)
+    const { setCur } = useContext(UtilModalContext)
 
     return (
   <div className="close" onClick={()=>setCur(-1)}>

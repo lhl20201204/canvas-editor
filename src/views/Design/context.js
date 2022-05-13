@@ -1,2 +1,3 @@
 import React from "react"
-export const TabContext = React.createContext()
+export const UtilModalContext = React.createContext()
+export const ContentContext = React.createContext()

@@ -1,3 +1,5 @@
+@w1: 12px;
+@w2: 30px;
 #middle{
     &.tab-open{
            width: calc(100vw - 432px); 
@@ -9,28 +11,62 @@
     height: 104px;
     position: relative;    
     > .pageContainer {
-        padding: 8px;
+        padding: 8px; 
         white-space: nowrap;
         overflow-x: scroll;
-        div {
-             &.selected  > canvas{
-                border: 2px solid #93989D;
-             }
-             &.selected  > span {
-                 background:  #F3F3F4;
-             }
-
+        > div {
             height: 100%;
             display: inline-block;
-            > canvas {
-                display: block;
-                border: 1px solid rgba(0,0,0,.3);
+            position: relative;
+            > div.interval {
+                position: absolute;
+                top: 0;
+                left:100%;
+                transform: translateX(-100%);
+                height: 48px;
+                width: @w1;
+                &.hovering{
+                    width: @w2;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
             }
-            > span {
-                display:inline-block;
-                width: 100%;
-                text-align: center;
-            }
+           > div.container {
+                display: inline-block;
+                margin-right: @w1;
+                &.hovering{
+                    margin-right: @w2;
+                }
+                 &.selected  > canvas{
+                    border: 2px solid #93989D;
+                 }
+                 &.selected  > span {
+                     background:  #F3F3F4;
+                 }
+                
+                #moreHandle {
+                    position: absolute;
+                    left:calc(100% - 14px);
+                    top: 3px;
+                    transform: translate(-100%);
+                    &.hidden{
+                        display: none;
+                    }
+                }
+                > canvas {
+                    display: block;
+                    border: 1px solid rgba(0,0,0,.3);
+                }
+                > span {
+                    display:inline-block;
+                    font-size: 14px;
+                    line-height: 22px;
+                    width: 100%;
+                    text-align: center;
+                }
+            }   
         }
+      
     }
 }

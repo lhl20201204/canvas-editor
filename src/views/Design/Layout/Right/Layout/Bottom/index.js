@@ -1,17 +1,16 @@
 import React, { useContext } from 'react'
 import CloseBtn from '../../components/CloseBtn'
-import { PageIndexContext, PageSizeContext, SliderContext } from '../../context'
+import { SliderContext } from '../../context'
 import { tabs } from '../../../../config'
 import "./index.less"
-import { TabContext } from '../../../../context'
+import { ContentContext, UtilModalContext } from '../../../../context'
 import { Slider, Row, Col } from 'antd'
 const remark = tabs[8]
 const fullScreen = tabs[10]
 export default function Index() {
-  const {pageIndex} = useContext(PageIndexContext)
+  const {pageIndex, canvasList} = useContext(ContentContext)
   const {scale, setScale} = useContext(SliderContext)
-  const {setCur} = useContext(TabContext)
-  const { pageSize } = useContext(PageSizeContext)
+  const {setCur} = useContext(UtilModalContext)
   const changeScale = (v) => {
     console.log(v)
     setScale(v)
@@ -35,7 +34,7 @@ export default function Index() {
             max={200} ></Slider>
         </Col>
        </Row>
-        <span className='pageSize'> {pageSize}</span> 
+        <span className='pageSize'> {canvasList.length}</span> 
         <span> <fullScreen.icon> </fullScreen.icon></span>
         </div> 
       {pageIndex===-1&&<CloseBtn></CloseBtn>}

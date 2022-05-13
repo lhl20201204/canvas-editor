@@ -1,12 +1,12 @@
 import React, { useContext } from 'react'
 import { tabs } from '../../../../config'
-import {TabContext} from '../../../../context'
+import {UtilModalContext} from '../../../../context'
 import "./index.less"
 const color = tabs[6]
 const effect = tabs[7]
 const time = tabs[9]
 export default function Index() {
-  const { setCur } = useContext(TabContext)
+  const { setCur } = useContext(UtilModalContext)
   return (
     <div id="header">
       <div className='fun'> 

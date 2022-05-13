@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
-import { PageIndexContext } from "../../context";
+import { ContentContext } from "../../../../context";
 export default function CloseBtn() {
-  const { pageIndex, setPageIndex } = useContext(PageIndexContext);
+  const { pageIndex, setPageIndex } = useContext(ContentContext);
 
   return (
     <div

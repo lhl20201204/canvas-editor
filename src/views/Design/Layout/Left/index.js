@@ -1,10 +1,10 @@
 import React, { useContext } from 'react'
 import {tabs} from '../../config';
-import { TabContext } from '../../context';
+import { UtilModalContext } from '../../context';
 import './index.less'
 const tab = tabs.slice(0,6)
 export default function Index() {
-  const {cur, setCur } = useContext(TabContext)
+  const {cur, setCur } = useContext(UtilModalContext)
   return (
     <div>
      {tab.map(({name, icon: Icon, id}) =>
