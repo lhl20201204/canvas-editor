@@ -8,9 +8,9 @@ import { Slider, Row, Col } from 'antd'
 const remark = tabs[8]
 const fullScreen = tabs[10]
 export default function Index() {
-  const {pageIndex, canvasList} = useContext(ContentContext)
+  const {selectedId, canvasList} = useContext(ContentContext)
   const {scale, setScale} = useContext(SliderContext)
-  const {setCur} = useContext(UtilModalContext)
+  const {setToolbarIndex} = useContext(UtilModalContext)
   const changeScale = (v) => {
     console.log(v)
     setScale(v)
@@ -19,7 +19,7 @@ export default function Index() {
     <div id="bottom">
         <div>
         {[remark].map(({id,name,icon:Icon}) =><div key={id}>
-           <span  onClick={()=> setCur(id)}> <Icon> </Icon> {name &&<span>{name}</span>} </span> 
+           <span  onClick={()=> setToolbarIndex(id)}> <Icon> </Icon> {name &&<span>{name}</span>} </span> 
         </ div>)}
       </div>
       <div className='slider-wrapper'>
@@ -37,7 +37,7 @@ export default function Index() {
         <span className='pageSize'> {canvasList.length}</span> 
         <span> <fullScreen.icon> </fullScreen.icon></span>
         </div> 
-      {pageIndex===-1&&<CloseBtn></CloseBtn>}
+      {selectedId===-1&&<CloseBtn></CloseBtn>}
     </div>
   )
 }

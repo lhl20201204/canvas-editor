@@ -1,14 +1,19 @@
 @w1: 12px;
 @w2: 30px;
 #middle{
-    &.tab-open{
+    &.hidden {
+      visibility: hidden;
+      height: 0;
+      padding: 0;
+    }
+    &.toolbar-open{
            width: calc(100vw - 432px); 
     }
-    &.tab-close{
+    &.toolbar-close{
         width: calc(100vw - 72px); 
     }
     padding: 4px;
-    height: 104px;
+    height: 96px;
     position: relative;    
     > .pageContainer {
         padding: 8px; 
@@ -47,7 +52,8 @@
                 
                 #moreHandle {
                     position: absolute;
-                    left:calc(100% - 14px);
+                    z-index: 20;
+                    left:calc(100% - 5px);
                     top: 3px;
                     transform: translate(-100%);
                     &.hidden{

@@ -2,10 +2,10 @@ import React, { useContext } from "react";
 import './index.less'
 import { UtilModalContext } from '../../context'
 const CloseBtn = () =>{ 
-    const { setCur } = useContext(UtilModalContext)
+    const { toolbarIndex, setToolbarIndex } = useContext(UtilModalContext)
 
     return (
-  <div className="close" onClick={()=>setCur(-1)}>
+  <div className="close" onClick={()=>setToolbarIndex(-1)}>
     <svg
       xmlns="http://www.w3.org/2000/svg"
       width="12"

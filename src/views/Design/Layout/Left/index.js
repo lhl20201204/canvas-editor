@@ -4,17 +4,17 @@ import { UtilModalContext } from '../../context';
 import './index.less'
 const tab = tabs.slice(0,6)
 export default function Index() {
-  const {cur, setCur } = useContext(UtilModalContext)
+  const {toolbarIndex, setToolbarIndex } = useContext(UtilModalContext)
   return (
     <div>
      {tab.map(({name, icon: Icon, id}) =>
-      <div key={name} className={"tab"+(cur===id?" tabSelected": "")} onClick={() =>setCur(id) }> 
+      <div key={name} className={"tab"+(toolbarIndex===id?" tabSelected": "")} onClick={() =>setToolbarIndex(id) }> 
       <Icon /> 
       <span>
         {name}
       </span>
      </div> )}
-     {cur}
+     {toolbarIndex}
     </div>
   
   )

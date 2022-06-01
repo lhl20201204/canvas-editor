@@ -1,14 +1,14 @@
 import React, { useContext } from "react";
 import { ContentContext } from "../../../../context";
 export default function CloseBtn() {
-  const { pageIndex, setPageIndex } = useContext(ContentContext);
+  const { selectedId, setSelectedId } = useContext(ContentContext);
 
   return (
     <div
       className="close"
-      onClick={() => setPageIndex(pageIndex === -1 ? 0 : -1)}
+      onClick={() => setSelectedId(selectedId === -1 ? 0 : -1)}
     >
-      {pageIndex > -1 ? (
+      {selectedId > -1 ? (
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="12"

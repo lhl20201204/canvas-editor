@@ -6,8 +6,8 @@ import { UtilModalContext, ContentContext } from './context'
 import { tabs } from './config'
 import './index.less'
 export default function Index() {
-  const [cur, setCur ] = useState(0)
-  const [ pageIndex, setPageIndex ] = useState(0)
+  const [toolbarIndex, setToolbarIndex ] = useState(0)
+  const [ selectedId, setSelectedId ] = useState(0)
   const [ canvasList, setCanvasList ] = useState(new Array(40).fill(0).map(v => ({
     id: Math.floor(Math.random() * 100000000)
   })))
@@ -15,13 +15,13 @@ export default function Index() {
     <ContentContext.Provider value={{
       canvasList, 
       setCanvasList,
-      pageIndex,
-      setPageIndex
+      selectedId,
+      setSelectedId
       }}>
-       <UtilModalContext.Provider value={{cur, setCur}}>
+       <UtilModalContext.Provider value={{toolbarIndex, setToolbarIndex}}>
       <div id="design">
       <Left> </Left>
-      { cur > -1 && <Middle Comp={tabs[cur].icon}></Middle>}
+      { toolbarIndex > -1 && <Middle Comp={tabs[toolbarIndex].icon}></Middle>}
       <Right></Right>
     </div>  
     </UtilModalContext.Provider>
