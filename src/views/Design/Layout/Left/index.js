@@ -16,6 +16,5 @@ export default function Index() {
      </div> )}
      {toolbarIndex}
     </div>
-  
   )
 }

@@ -1,76 +1,41 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useCallback, useContext, useEffect, useRef, useState } from 'react'
 import { initController } from '../../../../../../render'
+import ConfigTree from '../../../../ConfigTree'
 import { ContentContext } from '../../../../context'
 import { property } from '../../config'
 import { SliderContext } from '../../context'
 import "./index.less"
-let container = null
-let copyContainer = null
-let lastSelectedId = null
 const { width ,height} = property
 export default function Index() {
   const {selectedId, canvasList } = useContext(ContentContext)
   const {scale} = useContext(SliderContext)
-  const [el, setEl] = useState(null)
+  const lastSelectedId = useRef(selectedId)
  
-  const addDom =(id) => {
-    return (dom) => { 
-      if (dom === container) {
-        return
-      }
-      container = dom
-    copyContainer = initController( {
-      id,
-      dom,
-    },{
-      elements: [
-        {
-          type: 'Text',
-          props: {
-            scaleX: 2,
-            scaleY: 2,
-            x: 10,
-            y: 10,
-            content: id,
-          }
-        },
-        {
-          type: 'Text',
-          props: {
-            scaleX: 4,
-            scaleY: 4,
-            x: 50,
-            y: 50,
-            content: id,
-          }
-        }
-      ]
-    }) 
+ const bindEl = (selectedId) => (e) => {
+  if (e) {
+    const vm = ConfigTree.findTarget(canvasList, selectedId)
+    if (vm && vm.oldCopyContainer && vm.oldCopyContainer.parentNode) {
+      vm.oldCopyContainer.parentNode.removeChild(vm.oldCopyContainer)
+    }
+    vm.setEl(e)
   }
-}
+ }
 
   useEffect(() => {
-    if (el) {
-      addDom(selectedId)(el)
-    }
-    if (selectedId && selectedId !== lastSelectedId) {
-      if(copyContainer) {
-        copyContainer.parentNode.removeChild(copyContainer)
+    if (lastSelectedId.current !== selectedId) {
+      if (lastSelectedId.current > 0) {
+          const vm  = ConfigTree.findTarget(canvasList, lastSelectedId.current)
+          if (vm && vm.oldCopyContainer && vm.oldCopyContainer.parentNode) {
+            vm.oldCopyContainer.parentNode.removeChild(vm.oldCopyContainer)
+          }
       }
-      lastSelectedId = selectedId
+      lastSelectedId.current = selectedId
     }
-  }, [el, selectedId])
-
-  useEffect(() => {
-      if (copyContainer) {
-        copyContainer.style.width = (width * scale/100) +'px'
-        copyContainer.style.height = (height * scale/100) +'px'
-      }
-  }, [scale])
+  }, [selectedId])
 
   return (
     <div id="top" >
-      {selectedId > 0 && <div className="singleCanvas"><canvas key={selectedId} ref={el => setEl(el)}  style={{width: width * scale/100, height: height*scale/100}}>
+      {(selectedId > 0) && <div className="singleCanvas" style={{width: width * scale/100, height: height*scale/100}}><canvas key={selectedId} ref={bindEl(selectedId)} style={{width: '100%', height: '100%'}} >
       </canvas></div> }
     </div>
   )

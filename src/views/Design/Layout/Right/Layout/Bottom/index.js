@@ -12,7 +12,6 @@ export default function Index() {
   const {scale, setScale} = useContext(SliderContext)
   const {setToolbarIndex} = useContext(UtilModalContext)
   const changeScale = (v) => {
-    console.log(v)
     setScale(v)
   }
   return (
@@ -37,7 +36,7 @@ export default function Index() {
         <span className='pageSize'> {canvasList.length}</span> 
         <span> <fullScreen.icon> </fullScreen.icon></span>
         </div> 
-      {selectedId===-1&&<CloseBtn></CloseBtn>}
+      {selectedId < 0 &&<CloseBtn></CloseBtn>}
     </div>
   )
 }

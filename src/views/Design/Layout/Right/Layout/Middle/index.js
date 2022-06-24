@@ -6,6 +6,7 @@ import "./index.less"
 import { ContentContext, UtilModalContext } from '../../../../context'
 import { PlusOutlined } from '@ant-design/icons'
 import { initController } from '../../../../../../render'
+import ConfigTree from '../../../../ConfigTree'
 const { width ,height} = property;
 let timeout
 const interval = 1000
@@ -19,60 +20,14 @@ export default function Index(props) {
   const [ hoverTime, setHoverTime ] = useState(0)
 
   const addDom =(idn) => (e) => { 
-    if (map.has(idn) || !e) {
-       return
+    const vm = ConfigTree.findTarget(canvasList, idn)
+    if (!vm.smallEl) { 
+      vm.setSmallEl(e)
     }
-    map.set(idn, {dom: e, isRender: false})
-    if (map.size === canvasList.length) {
-      const state = canvasList.map(v => {
-        const {dom, isRender} = map.get(v.id)
-        if (isRender) {
-          return v
-        }
-        const ctx = dom.getContext('2d')
-        // ctx.scale(4,4)
-        // ctx.fillText(v.id, 10,10) // test
-        initController( {
-          ...v,
-          dom,
-        },{
-          elements: [
-            {
-              type: 'Text',
-              props: {
-                scaleX: 2,
-                scaleY: 2,
-                x: 10,
-                y: 10,
-                content: v.id,
-              }
-            },
-            {
-              type: 'Text',
-              props: {
-                scaleX: 4,
-                scaleY: 4,
-                x: 50,
-                y: 50,
-                content: v.id,
-              }
-            }
-          ]
-        })
-        map.set(v.id, {dom, isRender:true})
-        return {
-          ...v,
-          dom,
-          ctx
-        }
-      } )
-     setCanvasList(state) 
-    }
-    
   }
 
   const addCanvas = (i) => () => {
-    const state = [...canvasList.slice(0, i+1), { id: Math.floor(Math.random() * 100000000)}, ...canvasList.slice(i+1)]
+    const state = [...canvasList.slice(0, i+1), new ConfigTree({ id: Math.floor(Math.random() * 100000000)}), ...canvasList.slice(i+1)]
     setCanvasList(state)
   }
 
@@ -105,7 +60,7 @@ export default function Index(props) {
 
 
   const condition = i =>  hoveringAddselectedId === i && hoverTime >= minHoverTime
-  const middleClass = (toolbarIndex > -1 ?'toolbar-open': 'toolbar-close') + (selectedId === -1 ? ' hidden': '')
+  const middleClass = (toolbarIndex > -1 ?'toolbar-open': 'toolbar-close') + (selectedId < 0 ? ' hidden': '')
 
   return (
     <div id="middle" className={middleClass} >

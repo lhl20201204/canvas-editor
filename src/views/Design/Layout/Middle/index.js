@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
 import './index.less'
-import { UtilModalContext } from '../../context'
+import { ContentContext, UtilModalContext } from '../../context'
+import ConfigTree from "../../ConfigTree";
 const CloseBtn = () =>{ 
     const { toolbarIndex, setToolbarIndex } = useContext(UtilModalContext)
-
     return (
   <div className="close" onClick={()=>setToolbarIndex(-1)}>
     <svg
@@ -23,11 +23,39 @@ const CloseBtn = () =>{
   </div>
 )
     };
-
+  
 export default function Index(props) {
   const { Comp } = props;
+  const {  canvasList, selectedId, } = useContext(ContentContext)
+  const AddText = () => {
+     const vm = ConfigTree.findTarget(canvasList, selectedId)
+     console.log(vm)
+     const { currentConfig={} } = vm
+     vm.setConfig({
+      ...(currentConfig || {}),
+      elements: [
+        ...(currentConfig?.elements || []),
+        {
+          type: 'Text',
+          props: {
+            scaleX: 3,
+            scaleY: 3,
+            x: 60,
+            y: 10,
+            content: 'test',
+          },
+          to: {
+            scaleX: 5,
+            scaleY: 5,
+            x: 90
+          }
+        },
+      ]
+     })
+  }
   return (
     <div className="popup">
+      <button onClick={AddText}> 点击画图</button>
       {Comp && <Comp />}
       <CloseBtn />
     </div>
