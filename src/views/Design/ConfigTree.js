@@ -18,7 +18,7 @@ const SHAPES = {
 export default class ConfigTree {
     constructor({id, configList}) {
         if (!id) {
-           throw new Error('不能没有id')
+           throw new Error('no found id')
         }
         this.id = id
         this.el = null
